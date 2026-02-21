@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Application Tracker</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background-color: #1a1f26; color: #fff; }
+        .stats-card { background-color: #242b33; border: 1px solid #333b45; border-radius: 12px; }
+        .job-card { background-color: #242b33; border: 1px solid #333b45; transition: 0.3s; }
+        .job-card:hover { border-color: #4a5568; }
+        .tab-active-custom { background-color: #3b82f6 !important; color: white !important; }
+        .btn-outline-custom { border: 1px solid #4a5568; color: #a0aec0; }
+    </style>
+</head>
+<body class="min-h-screen p-6 md:p-12">
+
+    <header class="mb-10">
+        <h1 class="text-3xl font-bold text-blue-400">Job Application Tracker</h1>
+    </header>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+        <div class="stats-card p-6">
+            <p class="text-xs font-bold text-gray-400 uppercase tracking-widest">Total</p>
+            <h2 id="total-applied" class="text-4xl font-bold mt-2">8</h2>
+        </div>
+        <div class="stats-card p-6">
+            <p class="text-xs font-bold text-gray-400 uppercase tracking-widest">Interview</p>
+            <h2 id="total-interview" class="text-4xl font-bold mt-2">0</h2>
+        </div>
+        <div class="stats-card p-6">
+            <p class="text-xs font-bold text-gray-400 uppercase tracking-widest text-red-400">Rejected</p>
+            <h2 id="total-rejected" class="text-4xl font-bold mt-2">0</h2>
+        </div>
+    </div>
+
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
+        <h3 class="text-xl font-semibold">Available Jobs</h3>
+        <p class="text-gray-400 text-sm"><span id="job-count">8</span> jobs</p>
+    </div>
+
+    <div class="flex gap-3 mb-8">
+        <button onclick="changeTab('all', this)" class="btn btn-sm px-6 rounded-md tab-btn tab-active-custom border-none">All</button>
+        <button onclick="changeTab('interview', this)" class="btn btn-sm px-6 rounded-md tab-btn bg-gray-800 border-none">Interview</button>
+        <button onclick="changeTab('rejected', this)" class="btn btn-sm px-6 rounded-md tab-btn bg-gray-800 border-none">Rejected</button>
+    </div>
+
+    <div id="jobs-wrapper" class="space-y-4">
+        </div>
+
+    <div id="no-data" class="hidden text-center py-20">
+        <div class="text-6xl mb-4 text-gray-700">∅</div>
+        <h4 class="text-xl font-bold text-gray-500">No jobs Available</h4>
+        <p class="text-gray-600">Try changing your tab or add new jobs.</p>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
+
