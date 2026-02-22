@@ -1,26 +1,30 @@
-1. Differences in Selecting Elements
-The main difference lies in how you target the elements and what the method returns to you.
+1. What is the difference between getElementById, getElementsByClassName, and querySelector / querySelectorAll?
 
-2. Creating and Inserting a New Element
-It’s a three-step process: Create it, Configure it (add text or classes), and Append it to the DOM.
+getElementById: This is the most specific one. It looks for one unique element using its ID. Since IDs should be unique in a document, it always returns just one single element.
+getElementsByClassName: This searches for all elements that have a specific class name. It returns an "HTMLCollection," which is basically a list of all the matches it found.
+querySelector: This is like a Swiss Army knife. You can use CSS-style selectors (like .my-class, #my-id, or div > p). It only returns the first match it finds.
+querySelectorAll: This works exactly like querySelector, but instead of stopping at the first match, it finds all matching elements and puts them into a "NodeList".
 
-3. What is Event Bubbling?
-Think of it like a bubble rising in a glass of soda. When an event (like a click) happens on an element, it doesn't just stay there. It "bubbles up" to its parent, then the grandparent, all the way up to the document.
 
-How it works: If you click a button inside a <div>, the click event fires on the button first, then the <div> "feels" the click, and finally the <body> feels it too.
 
-4. What is Event Delegation?
-Instead of adding an event listener to every single button or list item, you add one single listener to the parent.
+2. How do you create and insert a new element into the DOM?
+It’s usually a two-step process:
+Create it: You use document.createElement('tag_name'). For example, const newDiv = document.createElement('div'); creates a div in memory but not yet on the page.
+Insert it: You have to tell the browser where to put it. You pick a parent element and use appendChild() to put it at the end, or prepend() to put it at the beginning. Example: document.body.appendChild(newDiv);.
 
-Why it’s useful:
 
-Memory Efficiency: One listener uses less memory than a hundred.
 
-Dynamic Elements: If you add a new list item via JavaScript later, the parent's listener will automatically handle it without you needing to manually attach a new event to the new item.
+3. What is Event Bubbling? And how does it work?
+Event Bubbling is how events move up through the DOM tree. Imagine you have a button inside a div. If you click that button, the click "bubbles up".
+How it works: First, the click triggers on the button itself. Then, it triggers on the div that holds the button, then the body, and finally the window. It’s like a ripple in water moving outward from the center.
 
-5. preventDefault() vs. stopPropagation()
-These two are often confused, but they do very different things:
 
-preventDefault(): Stops the browser’s default behavior. For example, it prevents a link from opening a URL or a form from refreshing the page when you click "Submit."
+4. What is Event Delegation in JavaScript? Why is it useful?
+Instead of adding an event listener to every single child element (like 50 different <li> tags), you add one single listener to their common parent.
+Why it's useful: It saves a lot of memory because you aren't creating dozens of functions. It’s also great for dynamic content—if you add a new list item later, you don't need to manually add a new listener to it; the parent is already watching for clicks on its children.
 
-stopPropagation(): Stops the Event Bubbling mentioned in Question 3. It prevents the event from traveling up to parent elements.
+
+
+5. What is the difference between preventDefault() and stopPropagation() methods?
+preventDefault(): This stops the default behavior of an element. For instance, if you click a submit button in a form, the page usually reloads. preventDefault() stops that reload so you can handle the data with JS.
+stopPropagation(): This stops Event Bubbling. If you click a child element and you don't want the parent's click event to fire as well, you use stopPropagation() to cut the event off right there.
