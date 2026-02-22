@@ -86,4 +86,5 @@ function updateDashboard() {
     document.getElementById('interview-count').innerText = jobs.filter(j => j.status === 'interview').length;
     document.getElementById('rejected-count').innerText = jobs.filter(j => j.status === 'rejected').length;
 }
+
 renderJobs();
