@@ -1,73 +1,59 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Job Tracker Dashboard</title>
+    <title>Job Application Tracker</title>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <style>
-        
-        body {
-            background-color: #12171d;
-            color: #ececec;
-            font-family: sans-serif;
-        }
-        .my-card {
-            background: #1c2229;
-            border: 1px solid #2d353f;
-            border-radius: 8px;
-        }
-        .active-tab {
-            background-color: #2563eb !important;
-            color: white !important;
-        }
-    </style>
 </head>
-<body class="p-5 md:p-10">
+<body class="bg-gray-50 min-h-screen p-4 md:p-8">
 
-    <div class="max-w-6xl mx-auto">
-        <header class="mb-8">
-            <h1 class="text-2xl font-bold text-blue-500">Job Application Tracker</h1>
-        </header>
+    <div class="max-w-5xl mx-auto">
+        <h1 class="text-2xl font-bold mb-6 text-slate-800">Job Application Tracker</h1>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10">
-            <div class="my-card p-5">
-                <span class="text-gray-400 text-xs uppercase font-bold">Total Applied</span>
-                <h2 id="applied-count" class="text-3xl font-bold mt-1">8</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+            <div class="bg-white p-6 rounded-lg shadow-sm border-l-4 border-blue-500">
+                <p class="text-gray-500 text-sm font-semibold">Total</p>
+                <h2 id="total-count" class="text-3xl font-bold">8</h2>
             </div>
-            <div class="my-card p-5">
-                <span class="text-gray-400 text-xs uppercase font-bold">Interviewing</span>
-                <h2 id="interview-count" class="text-3xl font-bold mt-1">0</h2>
+            <div class="bg-white p-6 rounded-lg shadow-sm border-l-4 border-green-500">
+                <p class="text-gray-500 text-sm font-semibold text-green-600">Interview</p>
+                <h2 id="interview-count" class="text-3xl font-bold">0</h2>
             </div>
-            <div class="my-card p-5">
-                <span class="text-gray-400 text-xs uppercase font-bold text-red-400">Rejected</span>
-                <h2 id="rejected-count" class="text-4xl font-bold mt-1 text-red-400">0</h2>
+            <div class="bg-white p-6 rounded-lg shadow-sm border-l-4 border-red-500">
+                <p class="text-gray-500 text-sm font-semibold text-red-600">Rejected</p>
+                <h2 id="rejected-count" class="text-3xl font-bold">0</h2>
             </div>
         </div>
 
-        <div class="flex justify-between items-center mb-5">
-            <h2 class="text-xl font-semibold text-gray-200">Available Jobs</h2>
-            <div class="text-sm text-gray-400"><span id="job-total-ui">8</span> Jobs Found</div>
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
+            <div>
+                <h3 class="text-xl font-bold">Available Jobs</h3>
+                <div class="tabs tabs-boxed mt-3 bg-transparent p-0 gap-2">
+                    <button onclick="filterJobs('all')" class="tab tab-active bg-blue-600 text-white rounded-md" id="tab-all">All</button>
+                    <button onclick="filterJobs('interview')" class="tab bg-white border" id="tab-interview">Interview</button>
+                    <button onclick="filterJobs('rejected')" class="tab bg-white border" id="tab-rejected">Rejected</button>
+                </div>
+            </div>
+            <div class="text-gray-500 font-medium"><span id="job-status-count">8</span> jobs</div>
         </div>
 
-        <div class="flex gap-2 mb-8">
-            <button onclick="filterAction('all', this)" class="btn btn-sm btn-filter active-tab">All</button>
-            <button onclick="filterAction('interview', this)" class="btn btn-sm btn-filter bg-slate-800 border-none">Interview</button>
-            <button onclick="filterAction('rejected', this)" class="btn btn-sm btn-filter bg-slate-800 border-none">Rejected</button>
-        </div>
-
-        <div id="job-list-container" class="grid grid-cols-1 gap-4">
+        <div id="job-container" class="grid grid-cols-1 gap-4">
             </div>
 
-        <div id="no-jobs-msg" class="hidden py-20 text-center">
-            <p class="text-5xl mb-3 opacity-20">No Data</p>
-            <h3 class="text-xl text-gray-500 font-bold">No jobs available here!</h3>
+        <div id="empty-state" class="hidden flex flex-col items-center justify-center py-20 bg-white rounded-xl border-2 border-dashed">
+            <div class="bg-blue-100 p-4 rounded-full mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+            </div>
+            <h3 class="text-xl font-bold">No jobs available</h3>
+            <p class="text-gray-400">Check back soon for new opportunities.</p>
         </div>
     </div>
 
-    <script src="app.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
 
