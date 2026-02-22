@@ -1,0 +1,26 @@
+1. Differences in Selecting Elements
+The main difference lies in how you target the elements and what the method returns to you.
+
+2. Creating and Inserting a New Element
+It’s a three-step process: Create it, Configure it (add text or classes), and Append it to the DOM.
+
+3. What is Event Bubbling?
+Think of it like a bubble rising in a glass of soda. When an event (like a click) happens on an element, it doesn't just stay there. It "bubbles up" to its parent, then the grandparent, all the way up to the document.
+
+How it works: If you click a button inside a <div>, the click event fires on the button first, then the <div> "feels" the click, and finally the <body> feels it too.
+
+4. What is Event Delegation?
+Instead of adding an event listener to every single button or list item, you add one single listener to the parent.
+
+Why it’s useful:
+
+Memory Efficiency: One listener uses less memory than a hundred.
+
+Dynamic Elements: If you add a new list item via JavaScript later, the parent's listener will automatically handle it without you needing to manually attach a new event to the new item.
+
+5. preventDefault() vs. stopPropagation()
+These two are often confused, but they do very different things:
+
+preventDefault(): Stops the browser’s default behavior. For example, it prevents a link from opening a URL or a form from refreshing the page when you click "Submit."
+
+stopPropagation(): Stops the Event Bubbling mentioned in Question 3. It prevents the event from traveling up to parent elements.
