@@ -1,4 +1,3 @@
-// Dummy Data
 let jobs = [
     { id: 1, company: "Mobile First Corp", role: "React Native Developer", loc: "Remote", type: "Full-time", salary: "$130k-$175k", status: "all", desc: "Build cross-platform mobile apps using React Native. Work on products used by millions." },
     { id: 2, company: "Webflow Agency", role: "Web Designer & Developer", loc: "Los Angeles, CA", type: "Part-time", salary: "$90k-$120k", status: "all", desc: "Create stunning web experiences for high-profile clients. Portfolio required." },
@@ -15,8 +14,6 @@ let currentTab = 'all';
 function renderJobs() {
     const container = document.getElementById('job-container');
     const emptyState = document.getElementById('empty-state');
-    
-    // Filtering logic
     const filtered = jobs.filter(job => currentTab === 'all' ? true : job.status === currentTab);
     
     document.getElementById('job-status-count').innerText = filtered.length;
@@ -56,7 +53,7 @@ function renderJobs() {
 function updateStatus(id, newStatus) {
     const jobIndex = jobs.findIndex(j => j.id === id);
     if (jobs[jobIndex].status === newStatus) {
-        jobs[jobIndex].status = 'all'; // Toggle back to default
+        jobs[jobIndex].status = 'all'; 
     } else {
         jobs[jobIndex].status = newStatus;
     }
@@ -70,8 +67,6 @@ function deleteJob(id) {
 
 function filterJobs(tab) {
     currentTab = tab;
-    
-    // UI Tab toggle
     ['all', 'interview', 'rejected'].forEach(t => {
         const el = document.getElementById(`tab-${t}`);
         if (t === tab) {
@@ -91,6 +86,4 @@ function updateDashboard() {
     document.getElementById('interview-count').innerText = jobs.filter(j => j.status === 'interview').length;
     document.getElementById('rejected-count').innerText = jobs.filter(j => j.status === 'rejected').length;
 }
-
-// Initial Call
 renderJobs();
